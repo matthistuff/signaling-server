@@ -2,11 +2,9 @@ FROM node:0.12
 
 ENV NODE_ENV="production"
 
-RUN wget https://github.com/dunlin/signaling-server/archive/master.tar.gz -O signaling-server-master.tar.gz && \
-	tar -zxvf signaling-server-master.tar.gz && \
-	rm signaling-server-master.tar.gz
+ADD . signaling-server/
 
-WORKDIR /signaling-server-master
+WORKDIR /signaling-server
 
 RUN npm install
 
