@@ -5,7 +5,7 @@ var colors = require('colors/safe'),
     socket = require('socket.io'),
 
     loglevel = parseInt(process.env.LOGLEVEL) || 1,
-    port = parseInt(process.env.PORT_SIGNAL) || 8888;
+    port = parseInt(process.env.HTTP_SERVER) || 8080;
 
 module.exports = function (options) {
     var serverOptions;

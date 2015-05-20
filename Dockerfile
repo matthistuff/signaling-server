@@ -10,4 +10,4 @@ RUN npm install
 
 CMD node index
 
-EXPOSE 8888
+EXPOSE 8080
