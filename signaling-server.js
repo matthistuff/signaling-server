@@ -1,23 +1,13 @@
 /*global console*/
-var colors = require('colors/safe'),
-    os = require('os'),
+var os = require('os'),
     uuid = require('node-uuid'),
     socket = require('socket.io'),
 
     loglevel = parseInt(process.env.LOGLEVEL) || 1,
     port = parseInt(process.env.HTTP_SERVER) || 8080;
 
-module.exports = function (options) {
-    var serverOptions;
-
-    if (options.secure) {
-        serverOptions = {
-            key: options.keys.serviceKey,
-            cert: options.keys.certificate
-        };
-    }
-
-    var io = socket.listen(port, serverOptions);
+module.exports = function () {
+    var io = socket.listen(port);
     io.set('log level', loglevel);
 
     io.sockets.on('connection', function (client) {
@@ -108,7 +98,7 @@ module.exports = function (options) {
         });
     });
 
-    console.log(colors.blue('Connection server started on port ' + port));
+    console.log('Connection server started on port ' + port);
 
     return os.hostname() + ':' + port;
 };
