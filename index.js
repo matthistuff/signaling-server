@@ -31,7 +31,7 @@ io.sockets.on('connection', function (client) {
                 if (!type) {
                     client.leave(client.room);
                     client.room = undefined;
-                    console.log(colors.red('Client ' + client.id + ' disconnected'));
+                    console.log('Client ' + client.id + ' disconnected');
                 }
             }
         };
@@ -62,7 +62,7 @@ io.sockets.on('connection', function (client) {
         cb(null, describeRoom(name));
         client.join(name);
         client.room = name;
-        console.log(colors.green('Client ' + client.id + ' connected'));
+        console.log('Client ' + client.id + ' connected');
     });
 
     // we don't want to pass "leave" directly because the
