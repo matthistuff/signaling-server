@@ -66,26 +66,6 @@ io.sockets.on('connection', function (client) {
     client.on('disconnect', leaveRooms);
 
     client.on('leave', leaveRooms);
-
-    client.on('create', function (name, cb) {
-        cb = cb || new Function;
-
-        if (arguments.length == 2) {
-            cb = (typeof cb == 'function') ? cb : function () {
-            };
-            name = name || uuid();
-        } else {
-            cb = name;
-            name = uuid();
-        }
-        // check if exists
-        if (io.sockets.clients(name).length) {
-            cb('taken');
-        } else {
-            join(name);
-            cb(null, name);
-        }
-    });
 });
 
 console.log('Connection server started on port ' + port);
