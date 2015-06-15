@@ -1,6 +1,7 @@
 /*global console*/
 var uuid = require('node-uuid'),
     socket = require('socket.io'),
+    _ = require('lodash'),
 
     loglevel = parseInt(process.env.LOGLEVEL) || 1,
     port = parseInt(process.env.HTTP_SERVER) || 8080;
@@ -11,28 +12,22 @@ io.set('log level', loglevel);
 io.sockets.on('connection', function (client) {
     // Socket functions
     var describeRoom = function (name) {
-            var clients = io.sockets.clients(name);
-            var result = {
-                clients: {}
+            return {
+                clients: _.reduce(io.sockets.clients(name), function (result, client) {
+                    result[client.id] = client.resources;
+                    return result;
+                }, {})
             };
-
-            clients.forEach(function (client) {
-                result.clients[client.id] = client.resources;
-            });
-
-            return result;
         },
-        removeFeed = function (type) {
+        leaveRooms = function () {
             if (client.room) {
                 io.sockets.in(client.room).emit('remove', {
-                    id: client.id,
-                    type: type
+                    id: client.id
                 });
-                if (!type) {
-                    client.leave(client.room);
-                    client.room = undefined;
-                    console.log('Client ' + client.id + ' disconnected');
-                }
+
+                client.leave(client.room);
+                client.room = undefined;
+                console.log('Client ' + client.id + ' disconnected');
             }
         };
 
@@ -58,7 +53,7 @@ io.sockets.on('connection', function (client) {
         // sanity check
         if (typeof name !== 'string') return;
         // leave any existing rooms
-        removeFeed();
+        leaveRooms();
         cb(null, describeRoom(name));
         client.join(name);
         client.room = name;
@@ -67,13 +62,9 @@ io.sockets.on('connection', function (client) {
 
     // we don't want to pass "leave" directly because the
     // event type string of "socket end" gets passed too.
-    client.on('disconnect', function () {
-        removeFeed();
-    });
+    client.on('disconnect', leaveRooms);
 
-    client.on('leave', function () {
-        removeFeed();
-    });
+    client.on('leave', leaveRooms);
 
     client.on('create', function (name, cb) {
         cb = cb || new Function;
