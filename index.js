@@ -44,8 +44,9 @@ io.sockets.on('connection', function (client) {
         var otherClient = io.sockets.sockets[details.to];
         if (!otherClient) return;
 
-        details.from = client.id;
-        otherClient.emit('message', details);
+        otherClient.emit('message', _.merge({
+            from: client.id
+        }, details));
     });
 
     client.on('join', function (name, cb) {
