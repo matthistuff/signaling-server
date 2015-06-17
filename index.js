@@ -35,4 +35,4 @@ server.route({
 
 server.start();
 
-console.log('Connection server started on port ' + port)
+console.log('Connection server started on port ' + port);
