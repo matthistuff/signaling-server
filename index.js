@@ -1,3 +1,15 @@
+/*
+ * Dunlin signaling server
+ * =======================
+ *
+ * Exposes a socket.io and REST interface for handling rooms and P2P connections.
+ *
+ * ENV
+ * ---
+ * Uses these ENV variables:
+ *
+ * `VIDEO_HOST` - The main application URL, used for a convenience link of the GET /api/room route
+ */
 var Hapi = require('hapi'),
     api = require('./lib/api'),
     signalingServer = require('./lib/signaling-server');
