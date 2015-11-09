@@ -33,6 +33,6 @@ server.route({
     }
 });
 
-server.start();
-
-console.log('Connection server started on port ' + port);
+server.start(function () {
+    console.log('Connection server started on port ' + port);
+});

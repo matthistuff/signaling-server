@@ -18,8 +18,8 @@
   },
   "homepage": "https://github.com/dunlin/signaling-server",
   "dependencies": {
-    "hapi": "8.6.1",
-    "lodash": "3.9.3",
+    "hapi": "11.1.0",
+    "lodash": "3.10.1",
     "moniker": "0.1.2",
     "socket.io": "0.9.16"
   }
