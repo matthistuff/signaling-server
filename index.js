@@ -15,7 +15,13 @@ var Hapi = require('hapi'),
     signalingServer = require('./lib/signaling-server');
 
 var port = parseInt(process.env.HTTP_SERVER) || 8080,
-    server = new Hapi.Server(),
+    server = new Hapi.Server({
+        connections: {
+            routes: {
+                cors: true
+            }
+        }
+    }),
     io;
 
 server.connection({
