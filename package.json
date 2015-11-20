@@ -5,7 +5,8 @@
   "description": "Dunlin signaling server",
   "main": "index.js",
   "scripts": {
-    "start": "node index"
+    "start": "node index",
+    "test": "echo \"No test specified\""
   },
   "repository": {
     "type": "git",

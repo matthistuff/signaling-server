@@ -1,0 +1,12 @@
+machine:
+  node:
+    version: 4.1.0
+
+deployment:
+  release:
+    branch:
+      - master
+    commands:
+      - ssh admin@video.dunlin.io ./dunlin-scripts/stop-container.sh "dunlin-signaling-server "
+      - ssh admin@video.dunlin.io ./dunlin-scripts/build-signaling-server.sh
+      - ssh admin@video.dunlin.io ./dunlin-scripts/start-container.sh "dunlin-signaling-server "
