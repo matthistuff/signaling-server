@@ -11,8 +11,9 @@
  * `VIDEO_HOST` - The main application URL, used for a convenience link of the GET /api/room route
  */
 var Hapi = require('hapi'),
-    api = require('./lib/api'),
-    signalingServer = require('./lib/signaling-server');
+    home = require('./lib/api/home'),
+    api = require('./lib/api/room'),
+    signaling = require('./lib/signaling');
 
 var port = parseInt(process.env.HTTP_SERVER) || 8080,
     server = new Hapi.Server({
@@ -28,16 +29,10 @@ server.connection({
     port: port
 });
 
-io = signalingServer(server);
-api(server, io);
+home(server);
 
-server.route({
-    method: 'GET',
-    path: '/',
-    handler: function (request, reply) {
-        reply('hello there!');
-    }
-});
+io = signaling(server.listener);
+api(server, io);
 
 server.start(function () {
     console.log('Connection server started on port ' + port);

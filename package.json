@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index",
-    "test": "echo \"No test specified\""
+    "test": "./node_modules/.bin/istanbul test _mocha"
   },
   "repository": {
     "type": "git",
@@ -23,5 +23,16 @@
     "lodash": "3.10.1",
     "moniker": "0.1.2",
     "socket.io": "0.9.16"
+  },
+  "devDependencies": {
+    "bluebird": "3.0.5",
+    "chai": "3.4.1",
+    "inject-then": "2.0.3",
+    "istanbul": "0.4.0",
+    "mocha": "2.3.4",
+    "rewire": "2.5.0",
+    "sinon": "1.17.2",
+    "sinon-chai": "2.8.0",
+    "socket.io-client": "0.9.16"
   }
 }
