@@ -1,4 +1,0 @@
---require ./testsuite.js
---reporter dot
---ui bdd
---recursive

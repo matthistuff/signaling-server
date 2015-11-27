@@ -5,6 +5,3 @@ npm-debug.log
 # IDE specific
 .idea/
 *.iml
-
-# Generated
-coverage/

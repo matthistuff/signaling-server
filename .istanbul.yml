@@ -1,7 +1,0 @@
-instrumentation:
-    excludes: ['testsuite.js']
-reporting:
-    print: summary
-    reports:
-        - lcov
-    dir: ./coverage
