@@ -33,6 +33,7 @@
     "rewire": "2.5.0",
     "sinon": "1.17.2",
     "sinon-chai": "2.8.0",
-    "socket.io-client": "0.9.16"
+    "socket.io-client": "0.9.16",
+    "terminate": "1.0.6"
   }
 }
