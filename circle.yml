@@ -2,10 +2,6 @@ machine:
   node:
     version: 4.1.0
 
-test:
-  post:
-    - cp -r coverage $CIRCLE_ARTIFACTS/
-
 deployment:
   release:
     branch:
